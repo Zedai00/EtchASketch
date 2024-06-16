@@ -1,20 +1,24 @@
 let container = document.querySelector(".pad")
 
-for (let i = 0; i < 16; i++) {
-  let row = document.createElement('div')
-  row.classList.add('row')
-  for (let j = 0; j < 16; j++) {
-    let col = document.createElement('div')
-    col.classList.add('col')
-    row.appendChild(col)
+function createGrid(size) {
+  let pixelSize = container.clientWidth / size
+  for (let i = 0; i < size * size; i++) {
+    let pixel = document.createElement('div')
+    pixel.classList.add('pixel')
+    pixel.style.width = `${pixelSize}px`
+    pixel.style.height = `${pixelSize}px`
+    container.appendChild(pixel)
   }
-  container.appendChild(row)
 }
 
-let pixels = document.querySelectorAll('.col')
-
-pixels.forEach((elm) => {
-  elm.addEventListener('mouseover', () => {
-    elm.style.background = 'blue'
+function addEvent() {
+  let pixels = document.querySelectorAll('.pixel')
+  pixels.forEach((elm) => {
+    elm.addEventListener('mouseover', () => {
+      elm.style.background = 'blue'
+    })
   })
-})
+}
+
+createGrid(50)
+addEvent()
